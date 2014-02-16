@@ -8,6 +8,8 @@
   "bookmarks",
   "http://www.xoxohth.com/",
   "http://xoxohth.com/",
+  "http://www.autoadmit.com/",
+  "http://autoadmit.com/",
   "unlimitedStorage"
 ],
 //"permissions": ["storage", "webview", "<all_urls>"],
@@ -15,7 +17,14 @@
 
 "content_scripts":[
     {
-        "matches": ["http://xoxohth.com/main.php*", "http://xoxohth.com/"],
+        "matches": [
+            "http://xoxohth.com/main.php*",
+            "http://xoxohth.com/",
+            "http://xoxohth.com/?forum*",
+            "http://autoadmit.com/main.php*",
+            "http://autoadmit.com/",
+            "http://autoadmit.com/?forum*"
+        ],
         "js" : [
         	"jquery.js", 
         	"angular.min.js",
