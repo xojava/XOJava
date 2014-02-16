@@ -1,0 +1,67 @@
+<div style="float: left; top: 0; position: fixed; overflow-y: scroll; height:100%; width:275px">
+<br />
+Filter: <input ng-model="postersearch" type="text"><br />
+Sort: <select ng-model="posterorder">
+		<option value="nm" default>Name</option>
+		<option value="-tc">Threads</option>
+		<option value="-pc">Posts</option>
+	  </select><br />
+<table id="javaposters" class="css_poster_table">
+    <tr><td>T#</td><td>P#</td><td>Poster</td></tr>
+
+        <tr ng-repeat="poster in uniqPosters | array | filter:postersearch | orderBy:posterorder">
+            <td>{{ poster.tc }}</td> <td>{{ poster.pc }}</td> <td>{{ poster.nm }}</td>
+        </tr>
+
+</table>
+</div>
+
+<!-- above here is the nice, angular way.  below is still old jquery.  should come back and fix this later -->
+<script>
+	$('#javaposters').on('click', 'tr', function () {
+		var state = $(this).hasClass('highlightedPoster');
+		$('.highlightedPoster').removeClass('highlightedPoster');
+		$('a[href*="thread_id="]').removeClass('highlightedPoster');
+
+		if (!state) {
+			$(this).addClass('highlightedPoster');
+			//console.log('innerText: ' + $(this).children()[2].innerText);
+
+
+			var threads = SS.getAllThreads();
+			for (var tKey in threads) {
+				for(var poster in threads[tKey].posters) {
+					if(poster == $(this).children()[2].innerText) {
+						//console.log('hit at: ' + tKey.substring(5));
+						$('a[href*="thread_id=' + tKey.substring(5) + '"]').addClass('highlightedPoster');
+					}
+				}
+			}
+		}
+	});
+
+	$(function() {
+		$( document ).tooltip({
+		  items: "a",
+		  content: function() {
+			if (this.href.indexOf("thread_id") > -1) {
+				var threadId = this.href.substring(40, this.href.indexOf("&"));
+				var thread = SS.get('tx' + threadId);
+				if(thread != undefined) {
+					var r = "<table id='tooltip' class='css_hoverthread_table'><tr><td colspan='2'><font size='1'>&nbsp;" + thread.fp + "</font></td></tr>";
+					for (var key in thread.posters) {
+						if(thread.op == key) {
+							r += "<tr><td>OP " + thread.posters[key] + "</td><td>" + key + "</td></tr>";
+						} else {
+							r += "<tr><td>" + thread.posters[key] + "</td><td>" + key + "</td></tr>";
+						}
+					}
+					r += "</table>";
+					return r;
+				}
+			}
+		  }
+		});
+  });
+
+</script>

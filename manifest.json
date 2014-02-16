@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "XOJava",
+  "description": "XOJava...",
+  "version": "0.1",
+"permissions": [
+  "tabs",
+  "bookmarks",
+  "http://www.xoxohth.com/",
+  "http://xoxohth.com/",
+  "unlimitedStorage"
+],
+//"permissions": ["storage", "webview", "<all_urls>"],
+
+
+"content_scripts":[
+    {
+        "matches": ["http://xoxohth.com/main.php*", "http://xoxohth.com/"],
+        "js" : [
+        	"jquery.js", 
+        	"angular.min.js",
+            "angular-sanitize.min.js",
+        	"angular-route.min.js",
+        	"jquery-ui-1.10.4.custom.min.js", 
+        	"inject_thread_list.js"],
+        "css" : ["style.css","jquery-ui-1.10.4.custom.min.css"]
+    }
+  ],
+  "web_accessible_resources": [
+  	"jquery-ui-1.10.4.custom.min.js",
+  	"jquery-ui-1.10.4.custom.min.css", 
+  	"style.css", 
+  	"angular.min.js", 
+  	"angular.min.js.map",
+  	"angular-route.min.js",
+    "angular-route.min.js.map",
+    "angular-sanitize.min.js",
+    "angular-sanitize.min.js.map",
+  	"inject.js",
+  	"poster_list.html"
+  ]
+  
+  
+}
+ 
