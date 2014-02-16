@@ -73,7 +73,7 @@ var XOJavaIndex = {
         
         var threads = SS.getAllThreads();
         var uniqPosters = {};
-        var isSearch = (document.location.href.indexOf("&q=") > -1)?1:0;
+        var isSearch = (document.location.href.indexOf("&qu=") > -1)?1:0;
         for (var tKey in threads) {
 
             //evict cache for threads in local storage not on current page.  Don't evict cache on search results page.
@@ -100,6 +100,7 @@ var XOJavaIndex = {
         .controller('PosterListCtrl', function ($scope) {
            $scope.posterorder = 'nm';
            $scope.uniqPosters = uniqPosters;
+           $scope.postersearch = SS.get('postersearch');
         })
         .config(function($routeProvider, $sceProvider) {
             $sceProvider.enabled(false); //need to fix this at some point

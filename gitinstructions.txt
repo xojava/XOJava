@@ -1,0 +1,9 @@
+git add .
+git commit -m "comment"
+
+--initial
+git remote add origin git@github.com:xojava/XOJava.git
+
+
+--subsequent?
+git push -u origin master
