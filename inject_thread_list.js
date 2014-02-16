@@ -100,7 +100,6 @@ var XOJavaIndex = {
         .controller('PosterListCtrl', function ($scope) {
            $scope.posterorder = 'nm';
            $scope.uniqPosters = uniqPosters;
-           $scope.postersearch = SS.get('postersearch');
         })
         .config(function($routeProvider, $sceProvider) {
             $sceProvider.enabled(false); //need to fix this at some point
